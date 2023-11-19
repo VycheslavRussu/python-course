@@ -3,6 +3,7 @@
 # Ограничение памяти	64.0 Мб
 # Ввод	стандартный ввод или input.txt
 # Вывод	стандартный вывод или output.txt
+
 # Напишите программу, которая принимает на вход строку и вычисляет количество букв (кириллица и латиница в любом регистре), цифр и специальных символов.
 #
 # При выводе в первой строке указывается количество букв, во второй - количество цифр, в третьей - количество специальных символов.
@@ -15,3 +16,14 @@
 # 3
 # 5
 
+import re
+
+inputValue = input()
+
+letterCounter = len(re.findall(r'[a-zA-Zа-яА-ЯёЁ]', inputValue))
+digitCounter = len(re.findall(r'\d', inputValue))
+symbolCounter = len(re.findall(r'\W', inputValue))
+
+print(letterCounter, digitCounter, symbolCounter, sep='\n')
+
+# Он не считает символ '_' за символ.
