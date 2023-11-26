@@ -21,7 +21,7 @@
 # p5u3e2a1t3
 
 
-inputValue = 'pppppuuueeattt'
+inputValue = input()
 letterCounter = 1
 answerString = str()
 

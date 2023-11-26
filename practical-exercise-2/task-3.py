@@ -39,7 +39,7 @@
 # 122-124 — комментария
 # 125-130 — комментариев
 
-inputValue = input()
+inputValue = int(input())
 
 def wordEnding(wordCount):
     # Если число большое — оставляем от него только десятки
