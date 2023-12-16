@@ -2,59 +2,67 @@ import os
 import sys
 import itertools
 
-# example_path = '/Users/vycheslav/PycharmProjects/python-course/practical-exercise-3'
-#
-# os.walk(example_path, topdown=True)
+def project_stats(path, extensions):
+    # Возвращает число строк в исходниках проекта с выбранными файловыми форматами
 
-# def project_stats(path, extensions):
-#     # Вернуть число строк во всех файлах с заданным расширением
-#     example_extensions = ['.py', '.md']
-#     example_path = '/Users/vycheslav/PycharmProjects/python-course/practical-exercise-3'
-#
-#
-#     """
-#     Вернуть число строк в исходниках проекта.
-#
-#     Файлами, входящими в проект, считаются все файлы
-#     в папке ``path`` (и подпапках), имеющие расширение
-#     из множества ``extensions``.
-#     """
-#     pass
-#
-#
-# def total_number_of_lines(filenames):
-#     """
-#     Вернуть общее число строк в файлах ``filenames``.
-#     """
-#     pass
-#
-#
-# def number_of_lines(filename):
-#     """
-#     Вернуть число строк в файле.
-#     """
-#     pass
-#
-#
-# def iter_filenames(path):
-#     """
-#     Итератор по именам файлов в дереве.
-#     """
-#     pass
-#
-#
-# def with_extensions(extensions, filenames):
-#     """
-#     Оставить из итератора ``filenames`` только
-#     имена файлов, у которых расширение - одно из ``extensions``.
-#     """
-#     pass
-#
-#
+    file_list = list()
+    for root, directories, files in os.walk(path):
+        for file in files:
+            file_list.append(os.path.join(root) + '/' + file)
+
+    selected_filepaths = list()
+    for filepath in file_list:
+        file_name = os.path.basename(filepath)
+        if os.path.splitext(file_name)[1] in extensions:
+            selected_filepaths.append(filepath)
+
+    string_count = int()
+    for file_path in selected_filepaths:
+        print(file_path)
+        with open(file_path, 'r') as file:
+            string_count += file.read().count('\n')
+
+    return string_count
+    pass
+
+def total_number_of_lines(filenames):
+    # Вернуть общее число строк в файлах ``filenames``
+    string_count = int()
+    for file_name in filenames:
+        with open(file_name, 'r') as file:
+            string_count += file.read().count('\n')
+    return string_count
+    pass
+
+def number_of_lines(filename):
+    # Вернуть число строк в файле.
+    with open(filename, 'r') as file:
+        string_count = file.read().count('\n')
+    return string_count
+    pass
+
+def iter_filenames(path):
+    # Итератор по именам файлов в дереве
+    file_list = list()
+    for root, directories, files in os.walk(path):
+        for file in files:
+            file_list.append(os.path.join(root) + '/' + file)
+    return file_list
+    pass
+
+def with_extensions(extensions, filenames):
+    # Оставляем только те имена файлов, у которых расширение одно из списка
+    list_filenames = list()
+
+    for filepath in filenames:
+        file_name = os.path.basename(filepath)
+        if os.path.splitext(file_name)[1] in extensions:
+            list_filenames.append(os.path.splitext(file_name)[0])
+
+    return list_filenames
+    pass
 
 def get_extension(filename):
     # Возвращает расширение файла
     return os.path.splitext(filename)[1]
     pass
-
-print(get_extension('jopa.py'))
